@@ -61,7 +61,7 @@ Function Get-AzureMFAStatus {
  
     BEGIN {
         if (-not $SkipAdminCheck) {
-            $AdminUsers = Get-MsolRole -ErrorAction Stop | foreach {Get-MsolRoleMember -RoleObjectId $_.ObjectID} | Where-Object {$null -ne $_.EmailAddress} | Select EmailAddress -Unique | Sort-Object EmailAddress
+            $AdminUsers = Get-MsolRole -ErrorAction Stop | ForEach-Object {Get-MsolRoleMember -RoleObjectId $_.ObjectID} | Where-Object {$null -ne $_.EmailAddress} | Select-Object EmailAddress -Unique | Sort-Object EmailAddress
         }
     }
  

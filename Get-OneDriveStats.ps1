@@ -5,9 +5,9 @@ Function Get-OneDriveStats {
   #>
   process {
     $oneDrives = Get-PnPTenantSite -IncludeOneDriveSites -Filter "Url -like '-my.sharepoint.com/personal/'" -Detailed | 
-    Select Title,Owner,StorageQuota,StorageQuotaWarningLevel,StorageUsageCurrent,LastContentModifiedDate,Status
+    Select-Object Title,Owner,StorageQuota,StorageQuotaWarningLevel,StorageUsageCurrent,LastContentModifiedDate,Status
     $i = 0
-    $oneDrives | ForEach {
+    $oneDrives | ForEach-Object {
       [pscustomobject]@{
         "Display Name" = $_.Title
         "Owner" = $_.Owner

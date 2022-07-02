@@ -4,7 +4,7 @@ $objects = @()
 foreach ($computer in $computers){
 
     $objects += Get-WmiObject -Class MSFT_PhysicalDisk -ComputerName $computer -Namespace root\Microsoft\Windows\Storage | 
-    Select PSComputername, FriendlyName, MediaType
+    Select-Object PSComputername, FriendlyName, MediaType
 
 }
 

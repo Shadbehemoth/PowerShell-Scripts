@@ -60,7 +60,7 @@ $ExportCount=0
  $Results=@()
 
 #Get all users
-Get-MgUser -All -Filter "UserType eq 'Member'" | foreach {
+Get-MgUser -All -Filter "UserType eq 'Member'" | ForEach-Object {
  $ProcessedUserCount++
  $Name= $_.DisplayName
  $UPN=$_.UserPrincipalName
@@ -208,7 +208,7 @@ if((Test-Path -Path $ExportCSV) -eq "True")
   Write-Host `nThe Output file available in the current working directory with name: $ExportCSV -ForegroundColor Green
   Write-Host `n"For more Microsoft 365 PowerShell scripts, visit: https://o365reports.com"
   $Prompt = New-Object -ComObject wscript.shell   
-  $UserInput = $Prompt.popup("Do you want to open output file?",`   
+  $UserInput = $Prompt.popup("Do you want to open output file?",`
  0,"Open Output File",4)   
   If ($UserInput -eq 6)   
   {   

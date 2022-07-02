@@ -1,6 +1,6 @@
 Import-Module ActiveDirectory
 Get-ADUser -Filter * -Properties * | 
-Select AccountExpirationDate,AccountLockoutTime,AccountNotDelegated,AllowReversiblePasswordEncryption,`
+Select-Object AccountExpirationDate,AccountLockoutTime,AccountNotDelegated,AllowReversiblePasswordEncryption,`
 BadLogonCount,CannotChangePassword,CanonicalName,Certificates,ChangePasswordAtLogon,City,CN,Company,Country,`
 Created,Deleted,Department,Description,DisplayName,DistinguishedName,Division,DoesNotRequirePreAuth,EmailAddress,`
 EmployeeID,EmployeeNumber,Enabled,Fax,GivenName,HomeDirectory,HomedirRequired,HomeDrive,HomePage,HomePhone,Initials,`

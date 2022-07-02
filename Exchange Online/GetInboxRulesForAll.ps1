@@ -2,7 +2,7 @@ Get-ExoMailbox -ResultSize Unlimited |
 Select-Object -ExpandProperty UserPrincipalName | 
 Foreach-Object {Get-InboxRule -Mailbox $_ | 
 Select-Object -Property MailboxOwnerID,Name,Enabled,From,Description,RedirectTo,MoveToFolder,ForwardTo |
-	% {
+	ForEach-Object {
 		$_.MailboxOwnerID = [regex]::Replace($_.MailboxOwnerID, "(`n|`r|`t)+"," ", "Multiline");
 		$_.Name= [regex]::Replace($_.Name, "(`n|`r|`t)+"," ", "Multiline");
 		$_.Enabled= [regex]::Replace($_.Enabled, "(`n|`r|`t)+"," ", "Multiline");

@@ -1,6 +1,6 @@
 Connect-ExchangeOnline
 
-get-mailboxLocation -user EmailAddress | fl mailboxGuid,mailboxLocationType
+get-mailboxLocation -user EmailAddress | Format-List mailboxGuid,mailboxLocationType
 
 Get-Mailbox -identity EmailAddress | Get-MailboxStatistics | Select-Object Displayname, TotalItemSize, MailboxGuid
 

@@ -84,7 +84,7 @@ param(
             if (-not $PSBoundParameters.ContainsKey("AllItemsAndAllFolders") -and -not $PSBoundParameters.ContainsKey("Recurse")) {
                 $FileStats = Get-ChildItem -Path $Path -File -ErrorAction Stop | Measure-Object -Property Length -Sum
                 $FileCount = $FileStats.Count
-                $DirectoryCount = Get-ChildItem -Path $Path -Directory | Measure-Object | select -ExpandProperty Count
+                $DirectoryCount = Get-ChildItem -Path $Path -Directory | Measure-Object | Select-Object -ExpandProperty Count
                 $SizeMB =  "{0:F3}" -f ($FileStats.Sum / 1MB) -as [decimal]
  
                 [PSCustomObject]@{
@@ -98,7 +98,7 @@ param(
             if  ($PSBoundParameters.ContainsKey("AllItemsAndAllFolders")) {
                 $FileStats = Get-ChildItem -Path $Path -File -Recurse -ErrorAction Stop | Measure-Object -Property Length -Sum
                 $FileCount = $FileStats.Count
-                $DirectoryCount = Get-ChildItem -Path $Path -Directory -Recurse | Measure-Object | select -ExpandProperty Count
+                $DirectoryCount = Get-ChildItem -Path $Path -Directory -Recurse | Measure-Object | Select-Object -ExpandProperty Count
                 $SizeMB =  "{0:F3}" -f ($FileStats.Sum / 1MB) -as [decimal]
  
                 [PSCustomObject]@{
@@ -111,13 +111,13 @@ param(
  
             if ($PSBoundParameters.ContainsKey("Recurse")) {
                 Get-DirectoryTreeSize -Path $Path
-                $FolderList = Get-ChildItem -Path $Path -Directory -Recurse | select -ExpandProperty FullName
+                $FolderList = Get-ChildItem -Path $Path -Directory -Recurse | Select-Object -ExpandProperty FullName
  
                 if ($FolderList) {
                     foreach ($Folder in $FolderList) {
                         $FileStats = Get-ChildItem -Path $Folder -File | Measure-Object -Property Length -Sum
                         $FileCount = $FileStats.Count
-                        $DirectoryCount = Get-ChildItem -Path $Folder -Directory | Measure-Object | select -ExpandProperty Count
+                        $DirectoryCount = Get-ChildItem -Path $Folder -Directory | Measure-Object | Select-Object -ExpandProperty Count
                         $SizeMB =  "{0:F3}" -f ($FileStats.Sum / 1MB) -as [decimal]
  
                         [PSCustomObject]@{
