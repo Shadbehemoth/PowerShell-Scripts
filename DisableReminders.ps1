@@ -1,0 +1,1 @@
+Set-MailboxCalendarConfiguration -Identity UPN -RemindersEnabled $false

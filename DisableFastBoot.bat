@@ -1,0 +1,1 @@
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Power"  /V "HiberbootEnabled" /T REG_DWORD /d "0"
