@@ -9,7 +9,7 @@ foreach ($UPN in Get-ExoMailbox -ResultSize Unlimited | Select-Object -ExpandPro
 {
     Get-MailboxStatistics -identity $UPN |
     Select-Object Displayname, UserPrincipalName, TotalItemSize, MailboxGuid | 
-    % {
+    ForEach-Object {
 		$_.UserPrincipalName = $UPN;
 		return $_;
 	}
@@ -20,15 +20,15 @@ foreach ($UPN in Get-ExoMailbox -ResultSize Unlimited | Select-Object -ExpandPro
 Get-Mailbox -identity EMAIL | Select-Object Displayname, ProhibitSendQuota, ProhibitSendReceiveQuota
 
 #  One User's Archive
-Get-Mailbox -identity EMAIL -Archive | Select DisplayName, TotalItemSize, ItemCount
+Get-Mailbox -identity EMAIL -Archive | Select-Object-Object DisplayName, TotalItemSize, ItemCount
 
 
 #  Mailbox size of certain domains
-foreach ($UPN in Get-ExoMailbox -ResultSize Unlimited | where {$_.emailAddresses -like "*@DOMAIN" } | Select-Object -ExpandProperty UserPrincipalName)
+foreach ($UPN in Get-ExoMailbox -ResultSize Unlimited | Where-Object {$_.emailAddresses -like "*@DOMAIN" } | Select-Object -ExpandProperty UserPrincipalName)
 {
     Get-MailboxStatistics -identity $UPN |
     Select-Object Displayname, UserPrincipalName, TotalItemSize, MailboxGuid | 
-    % {
+    ForEach-Object {
 		$_.UserPrincipalName = $UPN;
 		return $_;
 	}
