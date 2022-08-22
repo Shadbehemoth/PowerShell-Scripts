@@ -36,6 +36,10 @@ if ($ArchiveNotEnabled.count -eq 1) {
     Start-ManagedFolderAssistant
     Write-Host "Archive enabled"
 } else {
+    get-mailboxLocation -user $Identity | 
+    Where-Object { $_.mailboxLocationType -eq "Primary" } | 
+    Select-Object mailboxGuid | 
+    Start-ManagedFolderAssistant
     Write-Host "Archive already enabled"
 }
 
