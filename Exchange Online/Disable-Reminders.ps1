@@ -5,7 +5,6 @@ param (
     $Identity
 )
 
-
 #Check for ExchangeOnlineManagement module 
 $Module = Get-Module ExchangeOnlineManagement -ListAvailable
 if ($Module.count -eq 0) { 
@@ -16,7 +15,7 @@ if ($Module.count -eq 0) {
         Install-Module ExchangeOnlineManagement -Repository PSGallery -AllowClobber -Force
     } 
     else { 
-        Write-Host EXO V2 module is required to connect Exchange Online.Please install module using Install-Module ExchangeOnlineManagement cmdlet. 
+        Write-Host EXO V2 module is required to connect Exchange Online. Please install module using Install-Module ExchangeOnlineManagement cmdlet. 
         Exit
     }
 } 
