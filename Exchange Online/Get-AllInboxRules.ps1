@@ -17,7 +17,9 @@ if ($Module.count -eq 0) {
 Connect-ExchangeOnline
 
 $Documents = [environment]::getfolderpath("mydocuments")
-mkdir "$Documents\Temp"
+if (!(Test-Path "$Documents\Temp")) {
+    mkdir "$Documents\Temp"
+}
 
 Get-ExoMailbox -ResultSize Unlimited | 
 Select-Object -ExpandProperty UserPrincipalName | 
@@ -33,8 +35,8 @@ Foreach-Object { Get-InboxRule -Mailbox $_ |
 		$_.MoveToFolder = [regex]::Replace($_.MoveToFolder, "(`n|`r|`t)+", " ", "Multiline");
 		$_.ForwardTo = [regex]::Replace($_.ForwardTo, "(`n|`r|`t)+", " ", "Multiline");
 		return $_;
-	} } | Export-CSV "$Documents\Temp\Mail_Rules.csv" -NoTypeInformation -Encoding UTF8
+	} }  | Export-CSV "$Documents\Temp\Mail_Rules.csv" -NoTypeInformation -Encoding UTF8
 
 
 
-Get-PSSession | Remove-PSSession
+# Get-PSSession | Remove-PSSession
